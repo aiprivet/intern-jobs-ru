@@ -1,30 +1,31 @@
-import { useState } from 'react'
+import { DiCode } from "react-icons/di";
+import { TbBrandJavascript } from "react-icons/tb";
 
+import Button from "./ui/Button";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-        </a>
-        <a href="https://react.dev" target="_blank">
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className="flex justify-between items-center border-b border-neutral-300">
+        <div className="text-slate-800 flex items-center pl-2 font-semibold">
+          <DiCode size="48"></DiCode>
+          <span>Стажировки для IT специалистов</span>
+        </div>
+      </header>
+      <main className="flex items-center justify-center mt-12 text-slate-800 flex-col">
+        <h1 className="text-center font-semibold text-3xl">
+          Найди стажировку по своему направлению
+        </h1>
+        <div className="mt-4">
+          <Button
+            color={"yellow"}
+            icon={<TbBrandJavascript></TbBrandJavascript>}
+          >
+            Frontend
+          </Button>
+        </div>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
