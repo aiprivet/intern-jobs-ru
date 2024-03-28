@@ -3,22 +3,23 @@ import VacancyItem from "./components/VacancyItem";
 import { useEffect, useState } from "react";
 import getPublicationDate from "./utils/getPublicationDay";
 import ChooseSpeciality from "./components/ChooseSpeciality";
-import HHIcon from "./ui/Icons/HHIcon";
-import YandexIcon from "./ui/Icons/YandexIcon";
+import Icons from "./ui/Icons/Icons";
 import { useSpeicalityStore } from "./store/useStore";
 import { vacancyRequestBySpeciality } from "./api/vacancyRequest";
+import { baseVacancies } from "./data/baseVacancies";
 import Spinner from "./ui/Spinner";
 
 function App() {
   const [allVacancies, setAllVacancies] = useState([]);
+  const [baseVacancy, setBaseVacancies] = useState([]);
   const [loading, setLoading] = useState(false);
   const speciality = useSpeicalityStore((state) => state.speciality);
 
-  
   useEffect(() => {
     (async function () {
       if (speciality !== null) {
         setLoading(true);
+        setBaseVacancies(baseVacancies[speciality]);
         await wait(500);
         getVacancies().then((data) => setAllVacancies(data));
         setLoading(false);
@@ -35,7 +36,7 @@ function App() {
         return items;
       }
     })();
-  }, [speciality]);
+  }, [speciality, baseVacancy]);
 
   return (
     <>
@@ -46,14 +47,14 @@ function App() {
         </div>
       </header>
       <main
-        className={`flex items-center justify-center ${
-          speciality ? "mt-0" : "mt-16"
-        } transition text-slate-800 dark:text-slate-100 flex-col`}
+        className={`flex items-center justify-center  ${
+          speciality ? "" : "mt-16"
+        }  transition text-slate-800 dark:text-slate-100 flex-col`}
       >
         <h1
           className={`${
             speciality ? "opacity-0 h-0 text-[0px]" : ""
-          }text-center font-semibold text-4xl transition`}
+          }text-center font-semibold text-4xl`}
         >
           Найди стажировки по своему направлению
         </h1>
@@ -69,18 +70,22 @@ function App() {
             <Spinner />
           ) : (
             <>
-              <VacancyItem
-                icon={<YandexIcon />}
-                link={"https://yandex.ru/yaintern/int_05"}
-                date={"Круглый год"}
-              >
-                Стажер Frontend-разработчик в Yandex
-              </VacancyItem>
+              {baseVacancy.map((vacancy) => (
+                <VacancyItem
+                  key={vacancy.name}
+                  icon={<Icons companyName={vacancy.company} />}
+                  link={vacancy.link}
+                  date={vacancy.date}
+                >
+                  {vacancy.name}
+                </VacancyItem>
+              ))}
+
               {allVacancies.map((vacancy) => (
                 <VacancyItem
                   isHHVacancy={true}
                   key={vacancy.id}
-                  icon={<HHIcon />}
+                  icon={<Icons companyName={"HH"} />}
                   link={vacancy.alternate_url}
                   date={getPublicationDate(vacancy.created_at)}
                 >
