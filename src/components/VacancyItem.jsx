@@ -29,7 +29,7 @@ export default function VacancyItem({
                 load
                   ? "dark:bg-gray-500 bg-gray-200 dark:text-gray-500 text-gray-200 animate-pulse rounded-lg"
                   : "text-gray-900 dark:text-white"
-              } text-2xl font-semibold tracking-tight  `}
+              } 2xl:text-2xl lg:text-xl text-sm font-semibold tracking-tight  `}
             >
               {children}
             </h5>
