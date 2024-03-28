@@ -18,11 +18,16 @@ function App() {
   useEffect(() => {
     (async function () {
       if (speciality !== null) {
-        setLoading(true);
-        setBaseVacancies(baseVacancies[speciality]);
-        await wait(500);
-        getVacancies().then((data) => setAllVacancies(data));
-        setLoading(false);
+        try {
+          setLoading(true);
+          setBaseVacancies(baseVacancies[speciality]);
+          await wait(300);
+          getVacancies().then((data) => setAllVacancies(data));
+        } catch (e) {
+          console.log(e);
+        } finally {
+          setLoading(false);
+        }
       }
       function wait(t) {
         return new Promise((resolve) => {
@@ -47,18 +52,20 @@ function App() {
         </div>
       </header>
       <main
-        className={`flex items-center justify-center  ${
-          speciality ? "" : "mt-16"
-        }  transition text-slate-800 dark:text-slate-100 flex-col`}
+        className={`flex items-center justify-center transition text-slate-800 dark:text-slate-100 flex-col`}
       >
         <h1
           className={`${
-            speciality ? "opacity-0 h-0 text-[0px]" : ""
-          }text-center font-semibold text-4xl`}
+            speciality !== null ? "opacity-0 absolute top-0" : ""
+          } text-center font-semibold text-4xl transition mt-16`}
         >
-          Найди стажировки по своему направлению
+          Найди стажировку по своему направлению
         </h1>
-        <div className="mt-8 flex gap-3 max-w-2xl flex-wrap justify-center">
+        <div
+          className={`mt-8 flex ${
+            speciality ? "gap-1" : "gap-3"
+          } transition max-w-2xl flex-wrap justify-center`}
+        >
           <ChooseSpeciality></ChooseSpeciality>
         </div>
         <div

@@ -15,6 +15,7 @@ export default function Button({
       "bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300",
     purple:
       "bg-purple-700 hover:bg-purple-800 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 focus:ring-purple-300",
+    load: "bg-gray-200 text-gray-200 dark:text-gray-500 dark:bg-gray-500 animate-pulse",
   };
   return (
     <button
@@ -22,8 +23,8 @@ export default function Button({
       onClick={onClick ? onClick : () => {}}
       className={`${
         icon ? "flex items-center gap-1" : ""
-      } transition cursor-pointer text-white focus:outline-none focus:ring-4 rounded-full ${
-        mini ? "px-1 py-[2px] text-xs" : "px-5 py-2.5 font-medium text-sm"
+      } transition text-sm cursor-pointer text-white focus:outline-none focus:ring-4 rounded-full ${
+        mini ? "px-5 py-2.5 scale-75 " : "px-5 py-2.5 font-medium"
       } text-center  ${colorClassNames[color]}`}
     >
       {icon ?? ""} {children}

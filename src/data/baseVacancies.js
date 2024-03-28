@@ -6,6 +6,12 @@ export const baseVacancies = {
       company: "Yandex",
       name: "Стажер Frontend разработчик в Yandex",
     },
+    {
+      link: "https://internship.vk.company/internship?direction=5&skill=505#vacancies",
+      date: "Весна-лето 2024",
+      company: "VK",
+      name: "Стажер Frontend разработчик в VK",
+    },
   ],
   Backend: [
     {
@@ -29,6 +35,12 @@ export const baseVacancies = {
       date: "Круглый год",
       company: "Yandex",
       name: "Стажер QA engineer в Yandex",
+    },
+    {
+      link: "https://internship.vk.company/internship?skill=505&direction=12#vacancies",
+      date: "Весна-осень 2024",
+      company: "VK",
+      name: "Стажер QA engineer в VK",
     },
   ],
   DevOps: [
