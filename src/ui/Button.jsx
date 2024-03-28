@@ -16,7 +16,7 @@ export default function Button({ children, color, onClick, icon }) {
       onClick={onClick ? onClick : () => {}}
       className={`${
         icon ? "flex items-center gap-1" : ""
-      }  cursor-pointer text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 ${
+      }  cursor-pointer text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 text-center  ${
         colorClassNames[color]
       }`}
     >
