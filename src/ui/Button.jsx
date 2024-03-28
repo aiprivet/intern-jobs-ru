@@ -1,4 +1,10 @@
-export default function Button({ children, color, onClick, icon }) {
+export default function Button({
+  children,
+  color,
+  onClick,
+  icon,
+  mini = false,
+}) {
   const colorClassNames = {
     blue: "bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 focus:ring-blue-300",
     red: "bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:ring-red-300",
@@ -16,9 +22,9 @@ export default function Button({ children, color, onClick, icon }) {
       onClick={onClick ? onClick : () => {}}
       className={`${
         icon ? "flex items-center gap-1" : ""
-      }  cursor-pointer text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 text-center  ${
-        colorClassNames[color]
-      }`}
+      } transition cursor-pointer text-white focus:outline-none focus:ring-4 rounded-full ${
+        mini ? "px-1 py-[2px] text-xs" : "px-5 py-2.5 font-medium text-sm"
+      } text-center  ${colorClassNames[color]}`}
     >
       {icon ?? ""} {children}
     </button>

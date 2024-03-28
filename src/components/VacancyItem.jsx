@@ -1,6 +1,12 @@
-import Button from "./Button";
+import Button from "../ui/Button";
 
-export default function VacancyItem({ children, link, icon, date }) {
+export default function VacancyItem({
+  children,
+  link,
+  icon,
+  date,
+  isHHVacancy = false,
+}) {
   return (
     <>
       <div className="relative  max-w-4xl  p-6 bg-white border border-neutral-300 rounded-lg dark:bg-gray-800 dark:border-gray-700">
@@ -14,9 +20,13 @@ export default function VacancyItem({ children, link, icon, date }) {
               <Button color={"blue"}>Перейти</Button>
             </a>
           </div>
-          <div className="absolute top-1 left-1 text-xs dark:text-gray-500 text-gray-600">
-            <p>Вакансия найдена на HH.ru</p>
-          </div>
+          {isHHVacancy ? (
+            <div className="absolute top-1 left-1 text-xs dark:text-gray-500 text-gray-600">
+              <p>Вакансия найдена на HH.ru</p>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="absolute top-1 right-1 text-xs dark:text-gray-500 text-gray-600">
             <p>{date}</p>
           </div>
