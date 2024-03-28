@@ -7,21 +7,34 @@ import HHIcon from "./ui/Icons/HHIcon";
 import YandexIcon from "./ui/Icons/YandexIcon";
 import { useSpeicalityStore } from "./store/useStore";
 import { vacancyRequestBySpeciality } from "./api/vacancyRequest";
+import Spinner from "./ui/Spinner";
 
 function App() {
   const [allVacancies, setAllVacancies] = useState([]);
+  const [loading, setLoading] = useState(false);
   const speciality = useSpeicalityStore((state) => state.speciality);
 
+  
   useEffect(() => {
-    if (speciality !== null) {
-      getVacancies().then((data) => setAllVacancies(data));
-    }
-    async function getVacancies() {
-      let vacancies = await fetch(vacancyRequestBySpeciality[speciality]);
-      vacancies = await vacancies.json();
-      let { items } = vacancies;
-      return items;
-    }
+    (async function () {
+      if (speciality !== null) {
+        setLoading(true);
+        await wait(500);
+        getVacancies().then((data) => setAllVacancies(data));
+        setLoading(false);
+      }
+      function wait(t) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, t);
+        });
+      }
+      async function getVacancies() {
+        let vacancies = await fetch(vacancyRequestBySpeciality[speciality]);
+        vacancies = await vacancies.json();
+        let { items } = vacancies;
+        return items;
+      }
+    })();
   }, [speciality]);
 
   return (
@@ -47,25 +60,35 @@ function App() {
         <div className="mt-8 flex gap-3 max-w-2xl flex-wrap justify-center">
           <ChooseSpeciality></ChooseSpeciality>
         </div>
-        <div className="mt-8 relative flex flex-col gap-4">
-          <VacancyItem
-            icon={<YandexIcon></YandexIcon>}
-            link={"https://yandex.ru/yaintern/int_05"}
-            date={"Круглый год"}
-          >
-            Стажер Frontend-разработчик в Yandex
-          </VacancyItem>
-          {allVacancies.map((vacancy) => (
-            <VacancyItem
-              isHHVacancy={true}
-              key={vacancy.id}
-              icon={<HHIcon></HHIcon>}
-              link={vacancy.alternate_url}
-              date={getPublicationDate(vacancy.created_at)}
-            >
-              {vacancy.name}
-            </VacancyItem>
-          ))}
+        <div
+          className={`${
+            loading ? "mt-52" : "flex-col flex"
+          } mt-8 relative gap-4`}
+        >
+          {loading ? (
+            <Spinner />
+          ) : (
+            <>
+              <VacancyItem
+                icon={<YandexIcon />}
+                link={"https://yandex.ru/yaintern/int_05"}
+                date={"Круглый год"}
+              >
+                Стажер Frontend-разработчик в Yandex
+              </VacancyItem>
+              {allVacancies.map((vacancy) => (
+                <VacancyItem
+                  isHHVacancy={true}
+                  key={vacancy.id}
+                  icon={<HHIcon />}
+                  link={vacancy.alternate_url}
+                  date={getPublicationDate(vacancy.created_at)}
+                >
+                  {vacancy.name}
+                </VacancyItem>
+              ))}
+            </>
+          )}
         </div>
       </main>
     </>
