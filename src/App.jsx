@@ -13,6 +13,7 @@ function App() {
   const [allVacancies, setAllVacancies] = useState([]);
   const [baseVacancy, setBaseVacancies] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   const speciality = useSpeicalityStore((state) => state.speciality);
 
   useEffect(() => {
