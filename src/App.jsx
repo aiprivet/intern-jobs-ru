@@ -1,4 +1,3 @@
-import { DiCode } from "react-icons/di";
 import VacancyItem from "./components/VacancyItem";
 import { useEffect, useState } from "react";
 import getPublicationDate from "./utils/getPublicationDay";
@@ -8,6 +7,7 @@ import { useSpeicalityStore } from "./store/useStore";
 import { vacancyRequestBySpeciality } from "./api/vacancyRequest";
 import { baseVacancies } from "./data/baseVacancies";
 import Spinner from "./ui/Spinner";
+import Header from "./components/Header";
 
 function App() {
   const [allVacancies, setAllVacancies] = useState([]);
@@ -45,12 +45,8 @@ function App() {
 
   return (
     <>
-      <header className="flex justify-between items-center border-b dark:border-slate-900 border-neutral-300">
-        <div className="text-slate-800 flex items-center pl-2 font-semibold dark:text-slate-100">
-          <DiCode size="48"></DiCode>
-          <span>IT Стажировки в РФ</span>
-        </div>
-      </header>
+      <Header></Header>
+      
       <main
         className={`flex items-center justify-center transition text-slate-800 dark:text-slate-100 flex-col`}
       >
@@ -63,8 +59,8 @@ function App() {
         </h1>
         <div
           className={`mt-8 flex ${
-            speciality ? "gap-1" : "gap-3"
-          } transition max-w-2xl flex-wrap justify-center`}
+            speciality ? "max-w-4xl " : "gap-3 max-w-2xl"
+          } transition   justify-center flex-wrap`}
         >
           <ChooseSpeciality></ChooseSpeciality>
         </div>
