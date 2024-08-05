@@ -17,7 +17,7 @@ export default function VacancyItem({
       <div
         className={`relative  max-w-4xl  p-6 bg-gray-100 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700`}
       >
-        <div className="mt-2 flex items-center gap-14">
+        <div className="mt-2 flex items-center sm:gap-14 gap-8">
           {load ? (
             <div className="p-6 dark:bg-gray-500 bg-gray-200 animate-pulse rounded-full"></div>
           ) : (

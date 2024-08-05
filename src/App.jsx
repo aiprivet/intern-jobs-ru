@@ -66,12 +66,12 @@ function App() {
           <ChooseSpeciality></ChooseSpeciality>
         </div>
         <div
-          className={`${
-            loading ? "mt-52" : "flex-col flex"
-          } mt-8 relative gap-4`}
+          className={`mt-8 relative gap-4 flex-col flex`}
         >
           {loading ? (
+            <div className="sm:mt-52 mt-32">
             <Spinner />
+             </div>
           ) : (
             <>
               {baseVacancy.map((vacancy) => (
