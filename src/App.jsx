@@ -22,7 +22,7 @@ function App() {
         try {
           setLoading(true);
           setBaseVacancies(baseVacancies[speciality]);
-          await wait(300);
+          await wait(250);
           getVacancies().then((data) => setAllVacancies(data));
         } catch (e) {
           console.log(e);
